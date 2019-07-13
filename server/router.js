@@ -7,6 +7,7 @@ module.exports = (app) => {
     })
   })
 
+  app.post('/users/login', UserController.login)
   app.get('/users/:id', UserController.getUserById)
   app.put('/users/:id', UserController.update)
   app.delete('/users/:id', UserController.delete)

@@ -1,8 +1,18 @@
 const Sequelize = require('sequelize')
+const MD5 = require('crypto-js/md5')
+
+function hashPassword (user, options) {
+  if (user.changed('password')) {
+    user.password = MD5(user.password).toString()
+  }
+}
 
 module.exports = (sequelize, DataTypes) => {
-  class Model extends Sequelize.Model { }
-
+  class Model extends Sequelize.Model {
+    comparePassword (password) {
+      return this.password === MD5(password).toString()
+    }
+  }
   Model.init({
     email: {
       type: DataTypes.STRING,
@@ -18,10 +28,13 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   },
-    {
-      sequelize,
-      modelName: 'User'
-    }
+  {
+    hooks: {
+      afterValidate: hashPassword
+    },
+    sequelize,
+    modelName: 'User'
+  }
   )
   return Model
 }
