@@ -14,5 +14,11 @@ module.exports = {
         paranoid: true
       }
     }
+  },
+  token: {
+    secretOrPrivateKey: 'movie',
+    options: {
+      expiresIn: '24h'
+    }
   }
 }
