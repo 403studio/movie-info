@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "ea1e0dc2-a7fc-4d86-ac43-06ed25aaa9a5",
+		"name": "movie",
+		"description": "Vue+Element+Express 全栈开发",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"testtest@google.com\",\n\t\"password\": \"12345678\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "User post success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"testtest@google.com\",\n\t\"password\": \"12345678\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/users",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "359"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"167-thQ7VAqcSbDQGOmmwCHbfd+Jvbs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 20 Jul 2019 00:56:34 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user\": {\n        \"id\": 3,\n        \"email\": \"testtest@google.com\",\n        \"password\": \"25d55ad283aa400af464c76d713c07ad\",\n        \"updatedAt\": \"2019-07-20T00:56:34.766Z\",\n        \"createdAt\": \"2019-07-20T00:56:34.766Z\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0dGVzdEBnb29nbGUuY29tIiwiaWF0IjoxNTYzNTg0MTk0LCJleHAiOjE1NjM2NzA1OTR9.uEcO-0i8a8D_SdCfC_YDOaLvjHgZOAUKHe85RFp6_tM\"\n}"
+				}
+			]
+		},
+		{
+			"name": "User get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/users/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"3"
+					]
+				},
+				"description": "通过用户ID获取用户信息"
+			},
+			"response": [
+				{
+					"name": "User get",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"3"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"user\": {\n        \"id\": 3,\n        \"email\": \"testtest@google.com\",\n        \"password\": \"25d55ad283aa400af464c76d713c07ad\",\n        \"updatedAt\": \"2019-07-20T00:56:34.766Z\",\n        \"createdAt\": \"2019-07-20T00:56:34.766Z\"\n    }\n}"
+				}
+			]
+		}
+	]
+}
