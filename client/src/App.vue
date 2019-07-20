@@ -7,7 +7,7 @@
         <code v-text="'<el-button>'"></code>
         below
       </p>
-      <el-button>el-button</el-button>
+      <el-button @click="test">el-button</el-button>
     </div>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
@@ -15,11 +15,19 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import UserService from './services/UserService'
 
 export default {
   name: 'app',
   components: {
     HelloWorld
+  },
+  methods: {
+    async test () {
+      console.log(2222222222222)
+      const user = await UserService.getUserById()
+      console.log(user)
+    }
   }
 }
 </script>

@@ -1,5 +1,5 @@
 module.exports = {
   devServer: {
-    proxy: "http://localhost:4000"
+    proxy: process.env.VUE_APP_MOCK_SERVER
   }
-};
+}
