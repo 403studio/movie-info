@@ -15,6 +15,7 @@ module.exports = {
     try {
       const user = await User.create(req.body)
       res.status(201).send({
+        code: 200,
         user,
         token: tokenSign(user)
       })
@@ -94,8 +95,14 @@ module.exports = {
       let isValidPassword = user.comparePassword(req.body.password)
       if (isValidPassword) {
         res.send({
+          code: 200,
           user: user.toJSON(),
           token: tokenSign(user)
+        })
+      } else {
+        res.status(200).send({
+          code: 403,
+          error: '用户名或密码错误'
         })
       }
     } catch (error) {
