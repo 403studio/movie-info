@@ -17,7 +17,7 @@
       <el-form-item prop="comparePassword" label="确认密码">
         <el-input v-model="registerForm.comparePassword" type="password"></el-input>
       </el-form-item>
-      <el-button type="primary" style="width:100%" native-type="submit" :loading="loading" @click="register">注册</el-button>
+      <el-button type="primary" style="width:100%" native-type="submit" :loading="loading" @click.prevent="register">注册</el-button>
       <div class="register-info">如果已注册账号请<router-link :to="{name: 'login'}">点击登录</router-link></div>
     </el-form>
   </div>
@@ -72,13 +72,18 @@ export default {
             if (response.data.code !== 200) {
               this.error = response.data.error
             } else {
-              // TODO:将用户信息和token保存到vuex
+              this.$store.dispatch('setToken', response.data.token)
+              this.$store.dispatch('setUser', response.data.user)
               this.$router.push('/')
             }
             this.loading = false
           } catch (error) {
+            if (error.response.data.error) {
+              this.error = error.response.data.error
+            } else {
+              this.error = '注册失败，请稍后重试'
+            }
             this.loading = false
-            this.error = '注册失败，请稍后重试'
           }
         }
       })
