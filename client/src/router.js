@@ -20,6 +20,14 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
     { path: '/users/login', alias: '/login', name: 'login', component: () => import('./views/user/login.vue') },
-    { path: '/users/register', alias: '/register', name: 'register', component: () => import('./views/user/register.vue') }
+    { path: '/users/register', alias: '/register', name: 'register', component: () => import('./views/user/register.vue') },
+    {
+      path: '/movies',
+      component: () => import('./views/layout/movie'),
+      children: [
+        { path: 'create', name: 'movie-create', component: () => import('./views/movie/create') },
+        { path: 'list', name: 'movie-list', component: () => import('./views/movie/list') }
+      ]
+    }
   ]
 })
