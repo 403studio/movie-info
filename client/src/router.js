@@ -26,8 +26,10 @@ export default new Router({
       component: () => import('./views/layout/movie'),
       children: [
         { path: 'create', name: 'movie-create', component: () => import('./views/movie/create') },
+        { path: 'detail/:id', name: 'movie-detail', component: () => import('./views/movie/detail') },
         { path: 'list', name: 'movie-list', component: () => import('./views/movie/list') }
       ]
-    }
+    },
+    { path: '*', redirect: { name: 'movie-list' } }
   ]
 })
