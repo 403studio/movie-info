@@ -2,6 +2,7 @@
   <div :class="className">
     <div class="box-header" :class="{'with-border': headerBorder}">
       <div class="box-title">{{ title }}</div>
+      <slot name="title-addon"></slot>
     </div>
     <div class="box-body">
       <slot></slot>
