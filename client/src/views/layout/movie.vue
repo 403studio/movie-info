@@ -34,8 +34,9 @@ export default {
     handleCommand (routeName) {
       if (routeName === 'logout') {
         this.logout()
+      } else {
+        this.$router.push({ name: routeName })
       }
-      this.$router.push({ name: routeName })
     },
     logout () {
       this.setUser(null)

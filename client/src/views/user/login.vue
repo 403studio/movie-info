@@ -57,7 +57,11 @@ export default {
             } else {
               this.$store.dispatch('setToken', response.data.token)
               this.$store.dispatch('setUser', response.data.user)
-              this.$router.push('/')
+              if (this.$route.query.redirect) {
+                this.$router.push(this.$route.query.redirect)
+              } else {
+                this.$router.push('/')
+              }
             }
             this.loading = false
           } catch (error) {

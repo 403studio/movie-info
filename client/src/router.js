@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from './store'
+import { Notification } from 'element-ui'
 
 Vue.use(Router)
 
@@ -39,8 +40,15 @@ router.beforeEach((to, from, next) => {
     if (store.state.isUserLogin) {
       next()
     } else {
-      // TODO: 提示用户访问的页面需要登录
-      next()
+      Notification({
+        title: '提示',
+        type: 'warning',
+        message: '请登录后再访问该页面'
+      })
+      next({
+        name: 'login',
+        query: { redirect: to.fullPath }
+      })
     }
   }
   next()
