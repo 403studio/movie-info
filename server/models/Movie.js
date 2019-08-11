@@ -7,14 +7,32 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING
     },
+    year: {
+      type: DataTypes.NUMBER
+    },
+    director: {
+      type: DataTypes.STRING
+    },
+    genre: {
+      type: DataTypes.STRING
+    },
     poster: {
       type: DataTypes.STRING
+    },
+    rating: {
+      type: DataTypes.STRING
+    },
+    imdb_id: {
+      type: DataTypes.STRING
+    },
+    description: {
+      type: DataTypes.TEXT
     }
   },
-    {
-      sequelize,
-      modelName: 'Movie'
-    }
+  {
+    sequelize,
+    modelName: 'Movie'
+  }
   )
   return Model
 }

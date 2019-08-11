@@ -2,11 +2,13 @@ import axios from 'axios'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 // import { Loading } from 'element-ui'
-// import store from '../store'
+import store from '../store'
 
 const request = axios.create({
+  baseURL: '/api',
   headers: {
-    showLoading: true
+    showLoading: true,
+    Authorization: `Bearer ${store.state.token}`
   }
 })
 NProgress.configure({ showSpinner: false })
