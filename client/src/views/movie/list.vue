@@ -7,7 +7,11 @@
         <label>动作</label>
         <label>剧情</label>
       </div>
-      <div class="text-success" style="margin-left: auto; cursor: pointer" @click="$router.push({name: 'movie-create'})">
+      <div
+        class="text-success"
+        style="margin-left: auto; cursor: pointer"
+        @click="$router.push({name: 'movie-create'})"
+        v-if="$store.state.isUserLogin">
         <i class="el-icon-plus"></i> 新增电影
       </div>
     </template>

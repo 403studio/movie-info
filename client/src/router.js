@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import store from './store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
       name: 'home',
-      component: Home
+      redirect: { name: 'movie-list' }
     },
     {
       path: '/about',
@@ -25,7 +25,7 @@ export default new Router({
       path: '/movies',
       component: () => import('./views/layout/movie'),
       children: [
-        { path: 'create', name: 'movie-create', component: () => import('./views/movie/create') },
+        { path: 'create', name: 'movie-create', component: () => import('./views/movie/create'), meta: { auth: true } },
         { path: 'detail/:id', name: 'movie-detail', component: () => import('./views/movie/detail') },
         { path: 'list', name: 'movie-list', component: () => import('./views/movie/list') }
       ]
@@ -33,3 +33,17 @@ export default new Router({
     { path: '*', redirect: { name: 'movie-list' } }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((router) => router.meta.auth)) {
+    if (store.state.isUserLogin) {
+      next()
+    } else {
+      // TODO: 提示用户访问的页面需要登录
+      next()
+    }
+  }
+  next()
+})
+
+export default router

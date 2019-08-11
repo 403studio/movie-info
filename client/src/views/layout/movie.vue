@@ -4,27 +4,43 @@
       <div class="header">
         <h1>Vue+Element+Express</h1>
         <div>
-          <el-dropdown @command="handleCommand">
+          <template v-if="!$store.state.isUserLogin">
+            <span @click="$router.push({name: 'login'})">登录</span>&nbsp;|
+            <span @click="$router.push({name: 'register'})">注册</span>
+          </template>
+          <el-dropdown @command="handleCommand" v-else>
             <span class="el-dropdown-link text-white"><i class="el-icon-s-tools">设置</i></span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="login">登录</el-dropdown-item>
+              <el-dropdown-item command="logout">退出</el-dropdown-item>
               <el-dropdown-item command="movie-create">新增电影</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
       </div>
     </el-header>
-    <el-main>
-      <router-view></router-view>
-    </el-main>
+    <router-view class="container"></router-view>
   </el-container>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   methods: {
+    ...mapActions([
+      'setUser',
+      'setToken'
+    ]),
     handleCommand (routeName) {
+      if (routeName === 'logout') {
+        this.logout()
+      }
       this.$router.push({ name: routeName })
+    },
+    logout () {
+      this.setUser(null)
+      this.setToken('')
+      this.$router.push({ name: 'movie-list' })
     }
   }
 }
@@ -39,5 +55,13 @@ export default {
     margin: 2px 0;
     margin-right: auto;
   }
+  span {
+    cursor: pointer;
+  }
+}
+.container {
+  width: 960px;
+  margin: 0 auto;
+  margin-top: 10px;
 }
 </style>

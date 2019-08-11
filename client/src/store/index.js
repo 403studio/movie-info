@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -34,6 +35,7 @@ const store = new Vuex.Store({
     setLoadingInstance ({ commit }, loadingInstance) {
       commit('setLoadingInstance', loadingInstance)
     }
-  }
+  },
+  plugins: [createPersistedState()]
 })
 export default store

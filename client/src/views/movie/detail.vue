@@ -1,7 +1,11 @@
 <template>
   <base-box title="电影列表" type="primary">
     <template v-slot:title-addon>
-      <div class="text-primary" style="margin-left: auto; cursor: pointer" @click="$router.push({name: 'movie-create'})">
+      <div
+        class="text-primary"
+        style="margin-left: auto; cursor: pointer"
+        @click="$router.push({name: 'movie-create'})"
+        v-if="$store.state.isUserLogin">
         <i class="el-icon-edit"></i> 编辑电影
       </div>
     </template>
