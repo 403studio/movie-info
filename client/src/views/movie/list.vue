@@ -2,10 +2,10 @@
   <base-box type="primary" title="电影">
     <template v-slot:title-addon>
       <div class="filter">
-        <label class="active">最新</label>
-        <label>高分</label>
-        <label>动作</label>
-        <label>剧情</label>
+        <label @click="orderBy('rating', $event)">最新</label>
+        <label @click="orderBy('rating', $event)">高分</label>
+        <label @click="filterByGenre('动作')">动作</label>
+        <label @click="filterByGenre('剧情')">剧情</label>
       </div>
       <div
         class="text-success"
@@ -29,28 +29,42 @@
 </template>
 
 <script>
+import MovieService from 'services/MovieService'
 export default {
   data () {
     return {
       movies: []
     }
   },
-  created () {
-    // TODO: 调用接口服务获取数据列表
-    this.movies = [
-      {
-        id: 1,
-        name: '哪吒之魔童降世',
-        poster: 'http://imge.gmw.cn/attachement/jpg/site2/20190725/005056a5c18d1ea3629b18.jpg',
-        rating: 8.6
-      },
-      {
-        id: 2,
-        name: '绿皮书',
-        poster: 'http://n.sinaimg.cn/translate/749/w450h299/20190222/w9VE-htknpmh2184101.jpg',
-        rating: 8.6
+  async created () {
+    try {
+      const response = await MovieService.getAll()
+      this.movies = response.data.movies
+    } catch (error) {
+      this.$message.error(`[${error.response.status}]，数据查询异常请稍后再试`)
+    }
+  },
+  methods: {
+    async orderBy (field, event) {
+      // console.log(event.target)
+      let query = `orderby=${field}`
+      try {
+        const response = await MovieService.getAll(query)
+        this.movies = response.data.movies
+      } catch (error) {
+        this.$message.error(`[${error.response.status}]，数据查询异常请稍后再试`)
       }
-    ]
+    },
+    async filterByGenre (genre, event) {
+      // console.log(event.target)
+      let query = `genre=${genre}`
+      try {
+        const response = await MovieService.getAll(query)
+        this.movies = response.data.movies
+      } catch (error) {
+        this.$message.error(`[${error.response.status}]，数据查询异常请稍后再试`)
+      }
+    }
   }
 }
 </script>

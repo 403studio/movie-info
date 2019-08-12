@@ -9,5 +9,8 @@ export default {
   },
   getById (id) {
     return request.get(`/movies/${id}`)
+  },
+  getAll (query = '') {
+    return request.get(`/movies?${query}`)
   }
 }

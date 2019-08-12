@@ -20,6 +20,7 @@ request.interceptors.request.use(config => {
     NProgress.start()
     delete config.headers.showLoading
   }
+  config.headers.Authorization = `Bearer ${store.state.token}`
   return config
 })
 request.interceptors.response.use(response => {

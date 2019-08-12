@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   devServer: {
     proxy: {
@@ -6,5 +8,9 @@ module.exports = {
         pathRewrite: { '^/api': '' }
       }
     }
+  },
+  chainWebpack: config => {
+    config.resolve.alias
+      .set('services', path.resolve(__dirname, './src/services'))
   }
 }
